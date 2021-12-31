@@ -1,5 +1,6 @@
 import { ATM } from '@src/atm';
 import { User } from '@src/user';
+import { NotEnoughCashError } from '@src/not-enough-cash-error';
 
 describe('use cases', () => {
   test('should create a cash machine with a user', () => {
@@ -26,9 +27,11 @@ describe('use cases', () => {
     const user = new User(initialBalance);
     const atm = new ATM(user);
 
-    const withdraw = 50;
-    atm.withdraw(withdraw);
-
-    expect(user).toThrow(NotEnoughCash);
+    const withdraw = 150;
+    try {
+      atm.withdraw(withdraw);
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotEnoughCashError);
+    }
   });
 });
