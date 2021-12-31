@@ -7,10 +7,7 @@ describe('success case', () => {
     const user = new User(initialBalance);
     const atm = new ATM(user);
 
-    const withdraw = 30;
-    atm.withdraw(withdraw);
-
-    expect(atm.showUserBalance()).toEqual('90.00');
+    expect(atm.showUserBalance()).toEqual('120.00');
   });
 
   test('should withdraw half from user balance', () => {
@@ -21,6 +18,6 @@ describe('success case', () => {
     const withdraw = 50;
     atm.withdraw(withdraw);
 
-    expect(atm.showUserBalance()).toEqual('50.00');
+    expect(atm.showUserBalance()).toEqual('45.50');
   });
 });
