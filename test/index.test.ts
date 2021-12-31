@@ -18,6 +18,6 @@ describe('success case', () => {
     const withdraw = 50;
     atm.withdraw(withdraw);
 
-    expect(atm.showUserBalance()).toEqual('45.50');
+    expect(atm.showUserBalance()).toEqual('49.50');
   });
 });
