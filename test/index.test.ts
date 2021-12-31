@@ -1,6 +1,7 @@
 import { ATM } from '@src/atm';
 import { User } from '@src/user';
 import { NotEnoughCashError } from '@src/not-enough-cash-error';
+import { NotAllowedValueError } from '@src/not-allowed-value-error';
 
 describe('use cases', () => {
   test('should create a cash machine with a user', () => {
@@ -33,5 +34,37 @@ describe('use cases', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(NotEnoughCashError);
     }
+  });
+
+  test('should launch exception if initial balance is negative', () => {
+    const initialBalance = -100;
+
+    expect(() => {
+      new User(initialBalance);
+    }).toThrow(NotAllowedValueError);
+  });
+
+  test('should launch exception if withdraw value is negative', () => {
+    const initialBalance = 100;
+    const user = new User(initialBalance);
+    const atm = new ATM(user);
+
+    const withdraw = -150;
+
+    expect(() => {
+      atm.withdraw(withdraw);
+    }).toThrow(NotAllowedValueError);
+  });
+
+  test('should launch exception if withdraw value is not multiple of five', () => {
+    const initialBalance = 100;
+    const user = new User(initialBalance);
+    const atm = new ATM(user);
+
+    const withdraw = 123;
+
+    expect(() => {
+      atm.withdraw(withdraw);
+    }).toThrow(NotAllowedValueError);
   });
 });

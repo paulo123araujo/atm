@@ -1,6 +1,15 @@
 import { NotEnoughCashError } from '@src/not-enough-cash-error';
+import { NotAllowedValueError } from '@src/not-allowed-value-error';
 export class User {
-  constructor(private _balance: number) {}
+  private _balance: number;
+
+  constructor(balance: number) {
+    if (balance < 0) {
+      throw new NotAllowedValueError();
+    }
+
+    this._balance = balance;
+  }
 
   public withdraw(value: number): void {
     if (value > this.balance) {
