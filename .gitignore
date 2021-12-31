@@ -1,0 +1,10 @@
+.env
+*.log
+node_modules/
+*.cache
+dist/
+esdata/
+.asdf/
+.tool-versions
+coverage/
+tmp/
